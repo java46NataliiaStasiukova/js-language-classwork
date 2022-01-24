@@ -1,54 +1,51 @@
-//*******************Arrays */
-const ar = [2, 100, 9, 80];
-//ar.sort(function(a, b){
-//   return a - b;
-//});
-
-//ar.sort((a, b) => a - b);
-//console.log(`ar is ${ar.toString()}`);
-//*******************Adding element/s at end of any array */
-ar[ar.length] = 200;
-console.log(ar);
-ar.push(300,25);
-console.log(ar);
-const ar1 = [-8, 30, -57];
-//ar.push(ar1); that will be added array but not separated numbers
-// if you want to add separated numbers you should apply a spread operator...
-ar.push(...ar1);
-console.log(ar);
-// for adding elements at begining of an array there is method "unshift"
-//everithing has been said about "push" will work for "unshift" only unlike "push" unshift method
-//adds elements at beginning
-const ar2 = [27, 35];
-ar.unshift(...ar2);
-console.log(ar);
-//abc123drtyugr
-//method splice for inserting or replacing any elements in any place
-//first argument - index for inserting or replacing
-//second argument - number of teh deleted elements (if 0 than splice will be applide only for inserting)
-//third argument - designates sequence of being inserted element like push/unshift
-ar.splice(2,0,1,3);
-console.log(ar);
-//removing (deleting)
-let el = ar.pop();//removes the last element and returns it
-//el = -57; -57 will be removed from the array ar
-el = ar.shift(); //renoves the first element and returns it
-//el = 27; 27 will be removed from the array ar
-console.log(el,ar);
-ar.splice(3,5);//remove 5 elements begining from the one at index 3
-console.log(ar);
-//includes, indexOf
-//two dimensional arrays
-const matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]];
-const matrix2 = [[100, 20], [50, -5], [34, 28]];
-displayMatrix(matrix2);
-function displayMatrix(matrix){
-   for(let i = 0; i < matrix.length; i++){
-      let row = '';
-      for (let j = 0; j < matrix[i].length; j++){
-         row = row + matrix[i][j] + '  ';
-      }
-      console.log(row);
-   }
+function mapper(n, i, a){
+   return `<li>${i + 1} of ${a.length} - ${n}</li>`;
 }
+function someFunction(){
+   const ar = [-10, 50, -12, 80, 40];
+   const ar3 = ar.map(mapper);
+   console.log(ar3);
+}
+
+const ar = [-10, 50, -12, 80, 40];
+ar.push(70);
+//1 ****** str - "-10#50#-12#80#40#70"
+//**********solution based on substring  */
+//let str = '';
+//ar.forEach(function(n){
+//   str += n + '#';
+//})
+// str - "-10#50#-12#80#40#70"
+//str = str.substring(0, str.length - 1);
+
+// str - "-10#50#-12#80#4070"
+//const lastSharpIndex = str.lastIndexOf('#')
+//const str1 = str.substring(0, lastSharpIndex);
+//const str2 = str.substring(lastSharpIndex +1);
+//str = str1 + str2;
+
+//**********solution based on forEach from second number */
+// str - "-10#50#-12#80#40#70"
+//const ar1 = ar.slice(1);
+//let str =  '' +ar[0];
+//ar1.forEach(n => str += '#' + n);
+//console.log(str);
+
+//***********printing out sequense number of element, element, length of array */
+// 1 of 5 => -10; .... 2 of 5 => 50 ....
+//ar.forEach((n, i, a) => console.log(`${i + 1} of ${a.length} - ${n}`));
+
+//********************************************************** */
+//method "map"
+//use case of applying method map: you want to create new array with elements that are recived as result of some converton
+//example you want to create new array with elements that are multiplication on 2 of each source element
+const ar2 = ar.map(n => n * 2);
+console.log(ar2);
+someFunction();
+//const ar3 = ar.map(n => `<li>${n}</li>`);
+
+//const ar3 = ar.map()
+//console.log(ar3);
+
+
 
