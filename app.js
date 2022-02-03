@@ -1,48 +1,73 @@
-const circle = {radius: 20, square: function(){
-    return 3.14 * (this.radius ** 2)
-}, perimeter: () => 2 * 3.14 * this.radius,
-toString: function(){
-    return `radius of this circle is ${this.radius}`
-}};
-console.log(`square = ${circle.square()}, perimeter = ${circle.perimeter()}`);
-// circle.square will be converted to square(circle) where circle as argument value,
-// this. is the hidden paramrtr in the function;
-//in any arrow function there is no "this";
-function square(circle){
-    return 3.14 * (circle.radius ** 2);
+class Person {
+    #id;
+    #name;
+    constructor(id, name) {
+            this.#id = id;
+            this.#name = name;
+    }
+    getId() {
+            return this.#id;
+    }
+    getName() {
+            return this.#name;
+    }
+    toString() {
+            return `id: ${this.#id}; name: ${this.#name};`;
+    }
 }
-console.log(`circle: ${circle}`);
-const circle1 = {radius:20, perimeter: function(){
-    return 2 * 3.14 * this.radius}
-    //return 3.14 * (this.radius ** 2)}, perimeter: function(){
-    //    return 2 * 3.14 * this.radius},
-    ,toString: function(){
-        return `radius of this circle is ${this.radius}`
-    }};
-    //circle1.square(); //error because the method square is not defined inside object circle
-    //error: circle square is not a function;
-    function Circle(radius){
-        this.radius = radius;
+const person = new Person(123, 'Moshe');
+console.log(`person is ${person}`);
+class Employee extends Person {
+    #salary;
+    constructor(id, name, salary) {
+            super(id, name); //call the constructor of the class Person
+            this.#salary = salary;
     }
-    Circle.prototype.square = function(){
-        return 3.14 * (this.radius ** 2);
+    computeSalary() {
+            return this.#salary;
     }
-    Circle.prototype.perimeter = function(){
-        return 2 * 3.14 * this.radius;
+    toString() {
+            return super.toString() + ` salary: ${this.computeSalary()}`;
     }
-    Circle.prototype.toString =  function(){
-        return `radius of this circle is ${this.radius}`
+}
+const person2 = new Employee(124, "Sara", 5000);
+console.log(`person2 is ${person2}`);
+console.log(typeof(person2)); // just object
+console.log(person2.constructor.name); // only this way JS allow getting constructor name
+class Child extends Person {
+    #kindergarden;
+    constructor(id, name, kindergarden) {
+         super(id, name);
+         this.#kindergarden = kindergarden;   
     }
-    const circle10 = new Circle(10);
-    //************************************************************** */
-    Array.prototype.filter = function(callbackPredicate){
-        console.log(`Tel-Ran copyright`);
-        const res = [];
-        this.forEach((n, i, a) => !callbackPredicate(n, i, a) && res.push(n));
-        return res;
+    getKindergarten() {
+            return this.#kindergarden;
     }
-    const ar = [1, 2, 4, 5, 100];
-    ar.filter(n => n%2 === 0).forEach(n => console.log(n));
+    toString() {
+            return `${super.toString()} kindergarden: ${this.#kindergarden}`;
+    }
+}
+const person3 = new Child(125, 'Yakob', 'Shalom');
+console.log(`person3 is ${person3}`);
+
+class WageEmployee extends Employee {
+    #hours;
+    #wage;
+    constructor(id, name, salary, hours, wage) {
+            super(id, name, salary);
+            this.#hours = hours;
+            this.#wage = wage;
+    }
+    computeSalary() {
+            return super.computeSalary() + this.#hours * this.#wage;
+    }
+    
+
+}
+const person4 = new WageEmployee(126, 'Asaf', 1000, 10, 100);
+console.log(`person4 is ${person4}`);
+
+   
 
 
 
